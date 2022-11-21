@@ -21,8 +21,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun logIn (vista:View)
     {
+        val url = "http://127.0.0.1:8080/pfinalphp/Conexion.php"
+
         if (usuario.text.toString()== "Alvaro" && pass.text.toString()== "123")
         {
             val ventana: Intent = Intent(this,Ventana2::class.java)
@@ -32,10 +35,6 @@ class MainActivity : AppCompatActivity() {
         {
             Toast.makeText(this, "Puto el k lo lea", Toast.LENGTH_SHORT).show()
         }
-
-
-
-
 
     }
 }
