@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/cuenta"
+        android:icon="@drawable/mi_info"
+        android:title="Informacion de cuenta"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/cerrar"
+        android:icon="@drawable/cerrar_cuenta"
+        android:title="salir"
+        app:showAsAction="never"
+        />
+
+
+</menu>

@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     pass.text.toString()==Respuesta.getString("Pass"))
                {
 
-                   val ventana: Intent = Intent(this,Ventana2::class.java)
+                   val ventana: Intent = Intent(this,PrincipalActivity::class.java)
 
                     startActivity(ventana)
                 }else
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
     procesoCola.add(resultado)
     }
     fun registro(vista: View){
-        val ventana:Intent = Intent(this,Registro::class.java)
+        val ventana:Intent = Intent(this,PrincipalActivity::class.java)
         startActivity(ventana)
     }
 }
