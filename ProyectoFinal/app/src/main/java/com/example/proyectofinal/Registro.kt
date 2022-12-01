@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.auth.FirebaseAuth
 import java.net.PasswordAuthentication
+import android.widget.Toast as toast
 
 class Registro : AppCompatActivity() {
     private lateinit var Nick:EditText
@@ -25,7 +26,7 @@ class Registro : AppCompatActivity() {
         ps2=findViewById(R.id.txt_ps2)
     }
     fun InsertU(vista:View){
-        val procesoCola: RequestQueue = Volley.newRequestQueue(this)
+      /*  val procesoCola: RequestQueue = Volley.newRequestQueue(this)
         val url = "http://192.168.101.14/pfinalphp/InsertUser.php"
         val resultado = object :StringRequest(Request.Method.POST,url,
             {Respuesta->
@@ -51,7 +52,18 @@ class Registro : AppCompatActivity() {
 
 
         }
-        procesoCola.add(resultado)
+        procesoCola.add(resultado)*/
+
+            if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email.text.toString(),Ps.text.toString()).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        android.widget.Toast.makeText(this, "Registrado", toast.LENGTH_SHORT).show()
+                    }else{
+                        toast.makeText(this, "Ocurrio un error", toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
     }
 }
 

@@ -12,6 +12,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.analytics.FirebaseAnalytics
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         usuario = findViewById(R.id.txt_ID)
         pass = findViewById(R.id.txt_Pass)
 
-
+        ejecutarAnalitica()
     }
 
 
@@ -59,10 +60,21 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
             })
 
+
     procesoCola.add(resultado)
     }
+    fun ejecutarAnalitica()
+    {
+        val analicis: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString("mensaje","Integracion de firebase completado")
+        analicis.logEvent("InitScreen",bundle)
+    }
+
     fun registro(vista: View){
-        val ventana:Intent = Intent(this,PrincipalActivity::class.java)
+        val ventana:Intent = Intent(this,Registro::class.java)
         startActivity(ventana)
     }
+
+
 }
