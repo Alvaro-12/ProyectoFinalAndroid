@@ -13,6 +13,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var usuario:EditText
     private lateinit var pass:EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,31 +40,20 @@ class MainActivity : AppCompatActivity() {
     {
         var us = usuario.text.toString()
         var ps = pass.text.toString()
-
-        val procesoCola:RequestQueue = Volley.newRequestQueue(this)
-        val url = "http://192.168.101.14/pfinalphp/Find.php?Nick=$us&Pass=$ps"
-        var resultado = JsonObjectRequest(
-            Request.Method.GET,url,null,{Respuesta->
-
-
-                if (usuario.text.toString()==Respuesta.getString("Nick")&&
-                    pass.text.toString()==Respuesta.getString("Pass"))
-               {
-
-                   val ventana: Intent = Intent(this,PrincipalActivity::class.java)
-
-                    startActivity(ventana)
-                }else
-              {
-                   Toast.makeText(this, "Puto el k lo lea", Toast.LENGTH_SHORT).show()
-                }
-
-            },{
+        if(us.isNotEmpty() && ps.isNotEmpty()){
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(us,ps).addOnCompleteListener {
+            if (it.isSuccessful){
+                val ventana:Intent = Intent(this,PrincipalActivity::class.java)
+                startActivity(ventana)
+            }else{
                 Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-            })
+            }
+        }
 
+            }else{
+            Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show()
+            }
 
-    procesoCola.add(resultado)
     }
     fun ejecutarAnalitica()
     {
@@ -72,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun registro(vista: View){
-        val ventana:Intent = Intent(this,Registro::class.java)
+        val ventana:Intent = Intent(this,PrincipalActivity::class.java)
         startActivity(ventana)
     }
 

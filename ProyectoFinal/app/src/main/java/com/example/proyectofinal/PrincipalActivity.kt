@@ -52,7 +52,10 @@ class PrincipalActivity : AppCompatActivity() {
         //return super.onOptionsItemSelected(item)
         when(item.itemId){
             R.id.cuenta -> {
-                Toast.makeText(this,"has seleccionado contactos", Toast.LENGTH_SHORT).show()
+                 val fragment = info_cuenta()
+                vp_Layaut.adapter.apply {
+
+                }
             }
 
             R.id.cerrar -> {
