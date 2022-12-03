@@ -33,24 +33,25 @@ class JuegoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var rb1: RadioButton=view.findViewById(R.id.rb1)
-        var rb2: RadioButton=view.findViewById(R.id.rb2)
-        var rb3: RadioButton=view.findViewById(R.id.rb3)
-        var rb4: RadioButton=view.findViewById(R.id.rb4)
-        var btn: Button = view.findViewById(R.id.iniv)
-        val bd = FirebaseFirestore.getInstance()
-        var rb = arrayListOf<RadioButton>(rb1,rb2,rb3,rb4)
 
-       cargarPregunta(rb,view)
+        var btn: Button = view.findViewById(R.id.iniv)
+       cargarPregunta(view)
 
         btn.setOnClickListener{
-            cargarPregunta(rb,view)
+            cargarPregunta(view)
         }
 
 
 
     }
-    fun cargarPregunta(rb:ArrayList<RadioButton>, view: View){
+    fun cargarPregunta(view: View){
+        var rb1: RadioButton=view.findViewById(R.id.rb1)
+        var rb2: RadioButton=view.findViewById(R.id.rb2)
+        var rb3: RadioButton=view.findViewById(R.id.rb3)
+        var rb4: RadioButton=view.findViewById(R.id.rb4)
+
+        val bd = FirebaseFirestore.getInstance()
+        var rb = arrayListOf<RadioButton>(rb1,rb2,rb3,rb4)
         var rp1: RadioButton
         var rp2: RadioButton
         var rp3: RadioButton
