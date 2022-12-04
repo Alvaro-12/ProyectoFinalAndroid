@@ -15,7 +15,7 @@ class splash_screen : AppCompatActivity() {
 
 
     fun starTimer(){
-        object: CountDownTimer(500, 500){
+        object: CountDownTimer(1000, 500){
             override fun onTick(p0: Long) {
 
             }
