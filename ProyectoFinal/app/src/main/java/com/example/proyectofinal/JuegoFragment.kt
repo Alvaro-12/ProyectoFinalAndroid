@@ -17,6 +17,9 @@ import org.checkerframework.common.subtyping.qual.Bottom
 class JuegoFragment : Fragment() {
     private val bd = FirebaseFirestore.getInstance()
     var respuesta:String=""
+
+    var aciertos = 0
+    var errores = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,7 +43,13 @@ class JuegoFragment : Fragment() {
         var rb2: RadioButton=view.findViewById(R.id.rb2)
         var rb3: RadioButton=view.findViewById(R.id.rb3)
         var rb4: RadioButton=view.findViewById(R.id.rb4)
+        var txterr: TextView = view.findViewById(R.id.txtErrores)
+        var txtaci: TextView = view.findViewById(R.id.txtAciertos)
+        var preguntah = 1
 
+
+        txterr.text = errores.toString()
+        txtaci.text = aciertos.toString()
         val bd = FirebaseFirestore.getInstance()
         var rb = arrayListOf<RadioButton>(rb1,rb2,rb3,rb4)
         var rp1: RadioButton
@@ -77,42 +86,105 @@ class JuegoFragment : Fragment() {
         }
 
         btn.setOnClickListener{
+            Log.d("Pregunta",preguntah.toString())
             if (rb1.isChecked){
-                if(rb1.text.toString() == respuesta){
-                    Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                if(preguntah==13){
 
                 }else{
-                    Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                    if(rb1.text.toString() == respuesta){
+
+                        Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
+                        aciertos += 1
+                        preguntah += 1
+                        txtaci.text = aciertos.toString()
+                        agregarpuntaje(aciertos)
+                        cargarPregunta(view)
+
+
+                    }else{
+
+                        Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
+                        errores += 1
+                        preguntah += 1
+                        txterr.text = errores.toString()
+
+                        cargarPregunta(view)
+                    }
+
                 }
+
             }else if(rb2.isChecked){
-                if(rb2.text.toString() == respuesta){
-                    Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                if(preguntah==13){
 
                 }else{
-                    Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                    if(rb2.text.toString() == respuesta){
+
+                        Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
+                        aciertos += 1
+                        preguntah += 1
+                        txtaci.text = aciertos.toString()
+                        agregarpuntaje(aciertos)
+                        cargarPregunta(view)
+
+                    }else{
+
+                        Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
+                        errores += 1
+                        preguntah += 1
+                        txterr.text = errores.toString()
+
+                        cargarPregunta(view)
+                    }
+
                 }
+
             }else if(rb3.isChecked){
-                if(rb3.text.toString() == respuesta){
-                    Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                if(preguntah==13){
 
                 }else{
-                    Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                    if(rb3.text.toString() == respuesta){
+                        Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
+                        aciertos += 1
+                        preguntah += 1
+                        txtaci.text = aciertos.toString()
+                        agregarpuntaje(aciertos)
+                        cargarPregunta(view)
+
+                    }else{
+
+                        Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
+                        errores += 1
+                        preguntah += 1
+                        txterr.text = errores.toString()
+
+                        cargarPregunta(view)
+                    }
+
                 }
+
             }else if(rb4.isChecked){
-                if(rb4.text.toString() == respuesta){
-                    Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                if(preguntah==13){
 
                 }else{
-                    Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
-                    cargarPregunta(view)
+                    if(rb4.text.toString() == respuesta){
+                        Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
+                        aciertos += 1
+                        preguntah += 1
+                        txtaci.text = aciertos.toString()
+                        agregarpuntaje(aciertos)
+                        cargarPregunta(view)
+
+                    }else{
+                        Toast.makeText(view.context, "Respuesta Incorracta, la respuesta es $respuesta", Toast.LENGTH_SHORT).show()
+                        errores += 1
+                        preguntah += 1
+                        txterr.text = errores.toString()
+
+                        cargarPregunta(view)
+                    }
+
                 }
+
             }else{
                 Toast.makeText(view.context, "Seleccione una respuesta", Toast.LENGTH_SHORT).show()
             }
@@ -164,6 +236,15 @@ class JuegoFragment : Fragment() {
             }
 
         }
+    }
+
+    fun agregarpuntaje(aciertos:Int){
+        var puntaje = ((10/12)*100).toString()
+        bd.collection("usuarios").document("pepe@gmail.com").set(
+            hashMapOf(
+                "Puntaje" to puntaje
+            )
+        )
     }
 
     companion object {
