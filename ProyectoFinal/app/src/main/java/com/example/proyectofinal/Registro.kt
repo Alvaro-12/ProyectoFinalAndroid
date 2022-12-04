@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.net.PasswordAuthentication
 import android.widget.Toast as toast
 
@@ -17,6 +18,7 @@ class Registro : AppCompatActivity() {
     private lateinit var Email:EditText
     private lateinit var Ps:EditText
     private lateinit var ps2:EditText
+    private var DB = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
@@ -26,38 +28,22 @@ class Registro : AppCompatActivity() {
         ps2=findViewById(R.id.txt_ps2)
     }
     fun InsertU(vista:View){
-      /*  val procesoCola: RequestQueue = Volley.newRequestQueue(this)
-        val url = "http://192.168.101.14/pfinalphp/InsertUser.php"
-        val resultado = object :StringRequest(Request.Method.POST,url,
-            {Respuesta->
-                Toast.makeText(this, "Resgistro con Exito", Toast.LENGTH_SHORT).show()
-                Nick.setText("")
-                Email.setText("")
-                Ps.setText("")
-                ps2.setText("")
-            },
-            {error->
-                Toast.makeText(this, "Ocurrio un error", Toast.LENGTH_SHORT).show()
-            }){
-            override fun getParams(): MutableMap<String, String>? {
-                var parametros = HashMap<String,String>()
-                parametros.put("Nick",Nick.text.toString())
-                parametros.put("Email",Email.text.toString())
-                parametros.put("Pass",Ps.text.toString())
-                parametros.put("Calificacion","2")
-                parametros.put("Errores","0")
-                parametros.put("Aciertos","0")
-                return parametros
-            }
-
-
-        }
-        procesoCola.add(resultado)*/
-
             if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email.text.toString(),Ps.text.toString()).addOnCompleteListener{
                     if(it.isSuccessful){
-                        android.widget.Toast.makeText(this, "Registrado", toast.LENGTH_SHORT).show()
+                        DB.collection("usuarios").document(Email.text.toString()).set(
+                            hashMapOf(
+                                "Email" to Email.text.toString(),
+                                "Nick" to Nick.text.toString(),
+                                "Puntaje" to "0",
+                                "Partidas" to "0",
+                                "MayorP" to "0",
+                                "MenorP" to "0"
+                            )
+
+                        )
+                        toast.makeText(this, "exito", toast.LENGTH_SHORT).show()
+                        finish()
                     }else{
                         toast.makeText(this, "Ocurrio un error", toast.LENGTH_SHORT).show()
                     }

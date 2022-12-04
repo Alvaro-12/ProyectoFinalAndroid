@@ -1,32 +1,32 @@
 package com.example.proyectofinal
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TableLayout
+import android.widget.TextView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QueryDocumentSnapshot
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [puntajeGobal.newInstance] factory method to
- * create an instance of this fragment.
- */
 class puntajeGobal : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    lateinit var lv_lista:ListView
+    lateinit var txt_mayor:TextView
+    lateinit var txt_menor:TextView
+    lateinit var txt_anterior:TextView
+
+
+    var db= FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,25 +35,40 @@ class puntajeGobal : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_puntaje_gobal, container, false)
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment puntajeGobal.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            puntajeGobal().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        lv_lista = view.findViewById(R.id.lv_puntajes)
+        txt_mayor = view.findViewById(R.id.txt_mayor)
+        txt_menor = view.findViewById(R.id.txt_menor)
+        txt_anterior = view.findViewById(R.id.txt_ultimo)
+        var lista:ArrayList<String> = arrayListOf<String>()
+        db.collection("usuarios").limit(5).orderBy("MayorP",Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("Collecciones", "${document.id} => ${document.data.get("Puntaje")}")
+
+                    lista.add("${document.data.get("Nick").toString()} |----------| ${document.data.get("MayorP").toString()}")
+                    var adaptador:ArrayAdapter<String> = ArrayAdapter<String>(view.context,R.layout.paralist,lista)
+                    lv_lista?.adapter = adaptador
                 }
             }
+            .addOnFailureListener { exception ->
+                Log.d("error", "Error getting documents: ", exception)
+            }
+        db.collection("usuarios").document("pepe@gmail.com").get().addOnSuccessListener { document->
+
+            txt_mayor.text=document.getString("MayorP")
+            txt_menor.text=document.getString("MenorP")
+            txt_anterior.text=document.getString("Puntaje")
+        }
+    }
+
+
+
+    companion object {
+
     }
 }
