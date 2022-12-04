@@ -1,15 +1,17 @@
 package com.example.proyectofinal
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.core.content.ContextCompat.startActivity
+import androidx.appcompat.app.AppCompatActivity
+
 
 class splash_screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        
         starTimer()
     }
 
@@ -27,4 +29,6 @@ class splash_screen : AppCompatActivity() {
 
         }.start()
     }
+
+
 }
