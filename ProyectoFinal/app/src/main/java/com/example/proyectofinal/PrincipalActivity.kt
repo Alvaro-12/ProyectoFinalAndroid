@@ -15,24 +15,26 @@ import com.google.android.material.tabs.TabLayoutMediator
 class PrincipalActivity : AppCompatActivity() {
     lateinit var tb_Layaut:TabLayout
     lateinit var vp_Layaut:ViewPager2
+    private lateinit var email:String
     var cantidad = 3
 
 
 
-    private val adaptador by lazy {
-        adaptadorF(this)
-    }
+
     private val adaptador2e by lazy {
         adaptador2(this)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
-       var bundle:Bundle? = intent.extras
+        var bundle:Bundle? = intent.extras
         tb_Layaut=findViewById(R.id.tb_layaot)
         vp_Layaut=findViewById(R.id.vp_layaout)
-        var prueva = prueva()
-        Log.d("principal",prueva.nombre)
+        email=bundle?.getString("email").toString()
+        Log.d("principal",email)
+        val adaptador by lazy {
+            adaptadorF(this,email)
+        }
         vp_Layaut.adapter=adaptador
 
         var mitabla = TabLayoutMediator(tb_Layaut,vp_Layaut,TabLayoutMediator.TabConfigurationStrategy{
@@ -60,6 +62,9 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(cantidad != 3){
+            val adaptador by lazy {
+                adaptadorF(this,email)
+            }
             vp_Layaut.adapter=adaptador
             cantidad == 3
             var mitabla = TabLayoutMediator(tb_Layaut,vp_Layaut,TabLayoutMediator.TabConfigurationStrategy{

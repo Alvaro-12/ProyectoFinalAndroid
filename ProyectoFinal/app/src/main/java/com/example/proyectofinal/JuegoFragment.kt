@@ -11,10 +11,11 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.sync.Semaphore
 import org.checkerframework.common.subtyping.qual.Bottom
 
 
-class JuegoFragment : Fragment() {
+class JuegoFragment(var email:String) : Fragment() {
     private val bd = FirebaseFirestore.getInstance()
     var respuesta:String=""
 
@@ -56,7 +57,7 @@ class JuegoFragment : Fragment() {
         var rp2: RadioButton
         var rp3: RadioButton
         var rp4: RadioButton
-        val txt: TextView   =view.findViewById(R.id.re)
+
         rp1=rb.random()
         rb.remove(rp1)
         rp2=rb.random()
@@ -65,6 +66,11 @@ class JuegoFragment : Fragment() {
         rb.remove(rp3)
         rp4=rb.random()
         rb.remove(rp4)
+        var prue = "fdvd"
+
+           val txt: TextView   =view.findViewById(R.id.re)
+            txt.text= email
+
 
         var pregunta = 1 .. 50
         val doc = bd.collection("Pregunta").document(pregunta.random().toString())
@@ -75,10 +81,10 @@ class JuegoFragment : Fragment() {
                 rp2.text= document.getString("Incorrecta1")
                 rp3.text= document.getString("Incorrecta2")
                 rp4.text= document.getString("Incorrecta3")
-                txt.text = document.getString("Pregunta")
+               // txt.text = document.getString("Pregunta")
 
-                var prueva = prueva()
-                Log.d("tag", prueva.nombre)
+
+
             }else{
                 Log.d("tag","errror")
             }
@@ -229,8 +235,7 @@ class JuegoFragment : Fragment() {
                 rp3.text= document.getString("Incorrecta2")
                 rp4.text= document.getString("Incorrecta3")
                 txt.text = document.getString("Pregunta")
-                var prueva = prueva()
-                Log.d("tag", prueva.nombre)
+
             }else{
                 Log.d("tag","errror")
             }
