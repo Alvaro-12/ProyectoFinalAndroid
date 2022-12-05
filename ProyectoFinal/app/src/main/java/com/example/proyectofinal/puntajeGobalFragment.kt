@@ -50,7 +50,7 @@ class puntajeGobal : Fragment() {
                 for (document in result) {
                     Log.d("Collecciones", "${document.id} => ${document.data.get("Puntaje")}")
 
-                    lista.add("${document.data.get("Nick").toString()} |----------| ${document.data.get("MayorP").toString()}")
+                    lista.add("${document.data.get("Nick").toString()} (＠＾◡＾) ${document.data.get("MayorP").toString()}")
                     var adaptador:ArrayAdapter<String> = ArrayAdapter<String>(view.context,R.layout.paralist,lista)
                     lv_lista?.adapter = adaptador
                 }
