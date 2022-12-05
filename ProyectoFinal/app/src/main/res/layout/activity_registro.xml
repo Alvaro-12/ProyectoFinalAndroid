@@ -101,7 +101,7 @@
         android:layout_height="47dp"
         android:layout_marginTop="68dp"
         android:text="REGISTRO"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
