@@ -3,16 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/fond"
     tools:context=".Registro">
 
-    <View
-        android:layout_width="405dp"
-        android:layout_height="174dp"
-        android:background="@drawable/rectangle_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/txt_Ps"
@@ -41,7 +36,7 @@
         android:hint="Confirmar contraseña"
         android:inputType="numberPassword"
         android:paddingLeft="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
@@ -56,7 +51,7 @@
         android:background="@color/transparente"
         android:onClick="InsertU"
         android:text="Registrarse"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_ps2" />
@@ -88,8 +83,7 @@
         android:hint="Nombre de usuario"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
-        android:textColor="@color/black"
-
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
