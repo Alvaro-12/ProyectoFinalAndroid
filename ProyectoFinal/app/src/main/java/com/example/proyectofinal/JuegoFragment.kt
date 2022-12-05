@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.sync.Semaphore
 import org.checkerframework.common.subtyping.qual.Bottom
+import kotlin.math.roundToInt
 
 
 class JuegoFragment(var email:String) : Fragment() {
@@ -69,7 +70,7 @@ class JuegoFragment(var email:String) : Fragment() {
         var prue = "fdvd"
 
            val txt: TextView   =view.findViewById(R.id.re)
-            txt.text= email
+
 
 
         var pregunta = 1 .. 50
@@ -81,7 +82,7 @@ class JuegoFragment(var email:String) : Fragment() {
                 rp2.text= document.getString("Incorrecta1")
                 rp3.text= document.getString("Incorrecta2")
                 rp4.text= document.getString("Incorrecta3")
-               // txt.text = document.getString("Pregunta")
+                txt.text = document.getString("Pregunta")
 
 
 
@@ -94,6 +95,7 @@ class JuegoFragment(var email:String) : Fragment() {
         btn.setOnClickListener{
             Log.d("Pregunta",preguntah.toString())
             if (rb1.isChecked){
+                rb1.isChecked = false
                 if(preguntah==13){
 
                 }else{
@@ -120,6 +122,7 @@ class JuegoFragment(var email:String) : Fragment() {
                 }
 
             }else if(rb2.isChecked){
+                rb2.isChecked = false
                 if(preguntah==13){
 
                 }else{
@@ -145,6 +148,7 @@ class JuegoFragment(var email:String) : Fragment() {
                 }
 
             }else if(rb3.isChecked){
+                rb3.isChecked = false
                 if(preguntah==13){
 
                 }else{
@@ -169,6 +173,7 @@ class JuegoFragment(var email:String) : Fragment() {
                 }
 
             }else if(rb4.isChecked){
+                rb4.isChecked = false
                 if(preguntah==13){
 
                 }else{
@@ -242,14 +247,70 @@ class JuegoFragment(var email:String) : Fragment() {
 
         }
     }
-
+    var puntajemay="0"
+    var puntajemen="0"
+    var nick="0"
     fun agregarpuntaje(aciertos:Int){
-        var puntaje = ((10/12)*100).toString()
-        bd.collection("usuarios").document("pepe@gmail.com").set(
-            hashMapOf(
-                "Puntaje" to puntaje
-            )
-        )
+        var puntaje:Float = aciertos.toFloat()/12*1000
+        Log.d("Puntaje",puntaje.toString())
+
+        bd.collection("usuarios").document(email).get().addOnSuccessListener{ document ->
+            if(document != null){
+
+                puntajemay= document.getString("MayorP").toString()
+                puntajemen =document.getString("MenorP").toString()
+                nick = document.getString("Nick").toString()
+                bd.collection("usuarios").document(email).set(
+
+                    if(puntajemay.toInt()>puntaje.roundToInt() ){
+                        if(puntajemen.toInt() > puntaje.roundToInt() || puntajemen.toInt() == 0){
+
+                            hashMapOf(
+                                "Email" to email,
+                                "Nick" to nick,
+                                "Puntaje" to puntaje.roundToInt().toString(),
+                                "MayorP" to puntajemay,
+                                "MenorP" to puntaje.roundToInt().toString()
+                            )
+                        }else{
+                            hashMapOf(
+                                "Email" to email,
+                                "Nick" to nick,
+                                "Puntaje" to puntaje.roundToInt().toString(),
+                                "MayorP" to puntajemay,
+                                "MenorP" to puntajemen
+                            )
+                        }
+
+                    } else {
+                        if(puntajemen.toInt() > puntaje.roundToInt() || puntajemen.toInt() == 0){
+
+                            hashMapOf(
+                                "Email" to email,
+                                "Nick" to nick,
+                                "Puntaje" to puntaje.roundToInt().toString(),
+                                "MayorP" to puntaje.roundToInt().toString(),
+                                "MenorP" to puntaje.roundToInt().toString()
+                            )
+                        }else{
+                            hashMapOf(
+                                "Email" to email,
+                                "Nick" to nick,
+                                "Puntaje" to puntaje.roundToInt().toString(),
+                                "MayorP" to puntaje.roundToInt().toString(),
+                                "MenorP" to puntajemen
+                            )
+                        }
+                    }
+
+                )
+            }else{
+
+            }
+
+
+        }
+
     }
 
     companion object {

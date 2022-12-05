@@ -21,9 +21,6 @@ class PrincipalActivity : AppCompatActivity() {
 
 
 
-    private val adaptador2e by lazy {
-        adaptador2(this)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
@@ -76,9 +73,6 @@ class PrincipalActivity : AppCompatActivity() {
                     1->{
                         tab.text=""
                     }
-                    2->{
-                        tab.text=""
-                    }
                 }
             })
             mitabla.attach()
@@ -90,9 +84,12 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //return super.onOptionsItemSelected(item)
+        val adaptador2e by lazy {
+            adaptador2(this,email)
+        }
         when(item.itemId){
             R.id.cuenta -> {
-                val fragment = info_cuenta()
+
 
                 vp_Layaut.adapter = adaptador2e
                 cantidad = 1

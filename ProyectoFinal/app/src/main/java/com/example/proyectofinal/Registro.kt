@@ -18,6 +18,7 @@ class Registro : AppCompatActivity() {
     private lateinit var Email:EditText
     private lateinit var Ps:EditText
     private lateinit var ps2:EditText
+
     private var DB = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class Registro : AppCompatActivity() {
         Email=findViewById(R.id.txt_Email)
         Ps=findViewById(R.id.txt_Ps)
         ps2=findViewById(R.id.txt_ps2)
+
     }
     fun InsertU(vista:View){
             if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){

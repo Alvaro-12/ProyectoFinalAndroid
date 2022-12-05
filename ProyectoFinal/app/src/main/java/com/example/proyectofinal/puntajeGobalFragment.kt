@@ -15,7 +15,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
 
-class puntajeGobal : Fragment() {
+class puntajeGobal(var email:String) : Fragment() {
 
     lateinit var lv_lista:ListView
     lateinit var txt_mayor:TextView
@@ -44,7 +44,7 @@ class puntajeGobal : Fragment() {
         txt_menor = view.findViewById(R.id.txt_menor)
         txt_anterior = view.findViewById(R.id.txt_ultimo)
         var lista:ArrayList<String> = arrayListOf<String>()
-        db.collection("usuarios").limit(5).orderBy("MayorP",Query.Direction.DESCENDING)
+        db.collection("usuarios").orderBy("MayorP",Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -58,7 +58,7 @@ class puntajeGobal : Fragment() {
             .addOnFailureListener { exception ->
                 Log.d("error", "Error getting documents: ", exception)
             }
-        db.collection("usuarios").document("pepe@gmail.com").get().addOnSuccessListener { document->
+        db.collection("usuarios").document(email).get().addOnSuccessListener { document->
 
             txt_mayor.text=document.getString("MayorP")
             txt_menor.text=document.getString("MenorP")
