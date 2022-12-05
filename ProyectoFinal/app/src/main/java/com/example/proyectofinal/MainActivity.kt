@@ -38,12 +38,13 @@ class MainActivity : AppCompatActivity() {
         if(us.isNotEmpty() && ps.isNotEmpty()){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(us,ps).addOnCompleteListener {
             if (it.isSuccessful){
-                val prefs = getSharedPreferences("shared_login_data", MODE_PRIVATE)
-                val editor = prefs.edit()
-                editor.putString("email", us.toString())
-                editor.commit()
 
-                val ventana:Intent = Intent(this,PrincipalActivity::class.java)
+                val ventana:Intent = Intent(this,PrincipalActivity::class.java).apply{
+
+                    putExtra("email",us)
+                }
+
+
                 startActivity(ventana)
             }else{
                 Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
@@ -55,13 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
 
     }
-    fun ejecutarAnalitica()
-    {
-        val analicis: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString("mensaje","Integracion de firebase completado")
-        analicis.logEvent("InitScreen",bundle)
-    }
+
 
     fun registro(vista: View){
         val ventana:Intent = Intent(this,Registro::class.java)
