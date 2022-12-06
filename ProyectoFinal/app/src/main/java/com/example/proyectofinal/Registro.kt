@@ -30,27 +30,37 @@ class Registro : AppCompatActivity() {
 
     }
     fun InsertU(vista:View){
-            if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email.text.toString(),Ps.text.toString()).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        DB.collection("usuarios").document(Email.text.toString()).set(
-                            hashMapOf(
-                                "Email" to Email.text.toString(),
-                                "Nick" to Nick.text.toString(),
-                                "Puntaje" to "0",
-                                "Partidas" to "0",
-                                "MayorP" to "0",
-                                "MenorP" to "0"
-                            )
+        if(Nick.text.isNotEmpty()){
+            if(Ps.text.toString() == ps2.text.toString()){
+                if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email.text.toString(),Ps.text.toString()).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            DB.collection("usuarios").document(Email.text.toString()).set(
+                                hashMapOf(
+                                    "Email" to Email.text.toString(),
+                                    "Nick" to Nick.text.toString(),
+                                    "Puntaje" to "0",
+                                    "Partidas" to "0",
+                                    "MayorP" to "0",
+                                    "MenorP" to "0"
+                                )
 
-                        )
-                        toast.makeText(this, "exito", toast.LENGTH_SHORT).show()
-                        finish()
-                    }else{
-                        toast.makeText(this, "Ocurrio un error", toast.LENGTH_SHORT).show()
+                            )
+                            toast.makeText(this, "exito", toast.LENGTH_SHORT).show()
+                            finish()
+                        }else{
+                            toast.makeText(this, "Ocurrio un error", toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+
+            }else{
+                toast.makeText(this,"contraseña no coincide",toast.LENGTH_LONG).show()
             }
+        }else{
+            toast.makeText(this,"no deje espacios en blanco",toast.LENGTH_LONG).show()
+        }
+
 
     }
 }

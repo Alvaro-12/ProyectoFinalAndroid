@@ -1,5 +1,6 @@
 package com.example.proyectofinal
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -98,6 +99,12 @@ class JuegoFragment(var email:String) : Fragment() {
                 rb1.isChecked = false
                 if(preguntah==13){
 
+                    mostraralerta(view,aciertos,errores)
+                    aciertos = 0
+                    errores = 0
+                    txterr.text="0"
+                    txtaci.text ="0"
+
                 }else{
                     if(rb1.text.toString() == respuesta){
 
@@ -124,7 +131,11 @@ class JuegoFragment(var email:String) : Fragment() {
             }else if(rb2.isChecked){
                 rb2.isChecked = false
                 if(preguntah==13){
-
+                    mostraralerta(view,aciertos,errores)
+                    aciertos = 0
+                    errores = 0
+                    txterr.text="0"
+                    txtaci.text ="0"
                 }else{
                     if(rb2.text.toString() == respuesta){
 
@@ -150,7 +161,11 @@ class JuegoFragment(var email:String) : Fragment() {
             }else if(rb3.isChecked){
                 rb3.isChecked = false
                 if(preguntah==13){
-
+                    mostraralerta(view,aciertos,errores)
+                    aciertos = 0
+                    errores = 0
+                    txterr.text="0"
+                    txtaci.text ="0"
                 }else{
                     if(rb3.text.toString() == respuesta){
                         Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
@@ -175,7 +190,11 @@ class JuegoFragment(var email:String) : Fragment() {
             }else if(rb4.isChecked){
                 rb4.isChecked = false
                 if(preguntah==13){
-
+                    mostraralerta(view,aciertos,errores)
+                    aciertos = 0
+                    errores = 0
+                    txterr.text="0"
+                    txtaci.text ="0"
                 }else{
                     if(rb4.text.toString() == respuesta){
                         Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
@@ -312,7 +331,14 @@ class JuegoFragment(var email:String) : Fragment() {
         }
 
     }
-
+    fun mostraralerta(view: View,aciertos: Int,errores:Int){
+        val builder = AlertDialog.Builder(view.context)
+        builder.setTitle("Ronda Finalizada")
+        builder.setMessage("Respuesta correctas $aciertos, respuestas incorrectas $errores")
+        builder.setPositiveButton("aceptar",null)
+        val dialog=builder.create()
+        dialog.show()
+    }
     companion object {
       private const val ARG_OBJECT2 = "objeto"
     }
