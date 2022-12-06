@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/colorpg"
     android:layout_height="match_parent"
     tools:context=".info_cuenta">
 
@@ -13,21 +14,25 @@
         android:id="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_color"
         android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/txt_nick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_color"
         android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.711"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email" />
 
@@ -35,31 +40,33 @@
         android:id="@+id/txtmayor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="128dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="36dp"
         android:text="TextView"
+        android:background="@drawable/colorplus"
         app:layout_constraintEnd_toStartOf="@+id/txtmenor"
-        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nick" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/txtmenor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="80dp"
         android:text="TextView"
+        android:background="@drawable/colorneg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nick" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Button
         android:id="@+id/btnsesion"
         android:layout_width="125dp"
         android:layout_height="67dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="60dp"
-        android:text="cerrar secion"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="136dp"
+        android:text="cerrar sesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtmayor" />
 
@@ -67,12 +74,12 @@
         android:id="@+id/btncerrar"
         android:layout_width="134dp"
         android:layout_height="67dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="24dp"
         android:onClick="cerrar"
-        android:text="eliminar puntajes"
+        android:text="Borrar historial"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnsesion"
         app:layout_constraintTop_toBottomOf="@+id/txtmenor" />
 
@@ -80,23 +87,27 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_color"
         android:text="Correo"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/txt_email"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_color"
         android:text="Usuario"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/txt_nick"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -104,20 +115,37 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/bg_color"
         android:text="Mayor Puntaje"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nick" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_color"
         android:text="Menor Puntaje"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_nick" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="232dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/colortx"
+        android:text="Informacion de cuenta"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
