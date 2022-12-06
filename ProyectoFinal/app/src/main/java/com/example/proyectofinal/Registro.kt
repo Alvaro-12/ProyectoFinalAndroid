@@ -2,6 +2,7 @@ package com.example.proyectofinal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import com.android.volley.Request
@@ -34,6 +35,7 @@ class Registro : AppCompatActivity() {
             if(Ps.text.toString() == ps2.text.toString()){
                 if(Email.text.isNotEmpty()&&Ps.text.isNotEmpty()){
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email.text.toString(),Ps.text.toString()).addOnCompleteListener{
+                        Log.d("Contraseña",Ps.text.toString())
                         if(it.isSuccessful){
                             DB.collection("usuarios").document(Email.text.toString()).set(
                                 hashMapOf(

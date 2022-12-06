@@ -20,7 +20,7 @@ import kotlin.math.roundToInt
 class JuegoFragment(var email:String) : Fragment() {
     private val bd = FirebaseFirestore.getInstance()
     var respuesta:String=""
-
+    var preguntah = 1
     var aciertos = 0
     var errores = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class JuegoFragment(var email:String) : Fragment() {
         var rb4: RadioButton=view.findViewById(R.id.rb4)
         var txterr: TextView = view.findViewById(R.id.txtErrores)
         var txtaci: TextView = view.findViewById(R.id.txtAciertos)
-        var preguntah = 1
+
 
 
         txterr.text = errores.toString()
@@ -104,6 +104,7 @@ class JuegoFragment(var email:String) : Fragment() {
                     errores = 0
                     txterr.text="0"
                     txtaci.text ="0"
+                    preguntah = 0
 
                 }else{
                     if(rb1.text.toString() == respuesta){
@@ -136,6 +137,7 @@ class JuegoFragment(var email:String) : Fragment() {
                     errores = 0
                     txterr.text="0"
                     txtaci.text ="0"
+                    preguntah = 0
                 }else{
                     if(rb2.text.toString() == respuesta){
 
@@ -166,6 +168,7 @@ class JuegoFragment(var email:String) : Fragment() {
                     errores = 0
                     txterr.text="0"
                     txtaci.text ="0"
+                    preguntah = 0
                 }else{
                     if(rb3.text.toString() == respuesta){
                         Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
@@ -195,6 +198,7 @@ class JuegoFragment(var email:String) : Fragment() {
                     errores = 0
                     txterr.text="0"
                     txtaci.text ="0"
+                    preguntah = 0
                 }else{
                     if(rb4.text.toString() == respuesta){
                         Toast.makeText(view.context, "Respuesta Correcta", Toast.LENGTH_SHORT).show()
